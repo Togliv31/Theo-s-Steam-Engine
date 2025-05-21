@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+		<link rel="stylesheet" href="../CSS/Style.css">
+		<title>Theo's Steam Engine - Store</title>
+		<link rel="icon" type="image/x-icon" href="../Bilder/Ikon.png">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+	
+	<body>
+		
+		<div class="w3-flex w3-mobile" style="flex-direction: column; justify-content: center; align-items: center;">
+			<div class="w3-bar w3-bottombar w3-border-black navLink" style="position: sticky;top:0;">
+				<div class="w3-dropdown-hover w3-hide-large" style="background-color:#f2d29f; margin-right:90%;">
+					<button class="w3-button w3-hover-black"><i class="material-icons">menu</i></button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a class="w3-bar-item w3-button w3-hover-black" href="../index.html">Store</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Account.html">Account</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Library.html">Library</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="News.html">News</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Help.html">Help</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Buy.html">Buy</a>
+					</div>
+				</div>
+				
+				<div class="w3-hide-small w3-hide-medium">
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="../index.html">Store</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Account.html" id="account">Account</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Library.html">Library</a>
+					</div>
+					<div class="navLink w3-bar-item w3-center">
+						<img src="../Bilder/Ikon2.png">
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="News.html">News</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Help.html">Help</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Buy.html">Buy</a>
+					</div>
+				</div>
+			</div>
+			<div class="w3-border w3-border-black w3-jumbo" id="cart"> <!-- content-->
+				<p>No games in shopping cart</p>
+			</div>
+			<div class="w3-padding w3-center w3-topbar w3-border-black" id="footer"> <!-- footer-->
+				<p>Theo's Steam Engine<br>
+				Last updated 21-05-2025<br>
+				Contacts: theosteamengine@NotARealCompany.com<br>
+				Adress: Cakestreet 42</p>
+			</div>
+		</div>
+		<script src="../JS/basic.js"></script>
+		<script>
+			// Något breakar här eller i library
+			function BuyGame(){
+				const games = JSON.parse(sessionStorage.getItem("games") || "[]");
+				const toBuy = JSON.parse(sessionStorage.getItem("toBuy") || "[]");
+
+				toBuy.forEach(game => {
+					games.unshift(game);
+				});
+				
+				sessionStorage.setItem("games", JSON.stringify(games));
+				
+				sessionStorage.setItem("toBuy", "[]");
+				
+				update();
+			}
+			
+			function update(){
+				let cart = "Shopping cart:";
+				const toBuy = JSON.parse(sessionStorage.getItem("toBuy") || "[]");
+				
+				if (toBuy != null && toBuy.length != 0){
+					toBuy.forEach(game => {
+						cart += "<br>" + game;
+					});
+					cart += `<br><button type="button" class="w3-button w3-black w3-round-large w3-hover-white w3-border w3-border-black" onclick="BuyGame()">Buy - ${toBuy.length*57.99}£</button>`;
+					document.getElementById("cart").innerHTML = cart;
+				}
+				else {
+					cart += '<p>No items in shopping cart</p>'
+					document.getElementById("cart").innerHTML = cart;
+				}
+			}
+			
+			update();
+		</script>
+	</body>
+</html>
