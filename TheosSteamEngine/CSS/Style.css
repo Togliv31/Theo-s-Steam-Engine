@@ -1,0 +1,115 @@
+.navLink a{
+	text-decoration:none;
+}
+
+.navLink img{
+	height:100px; /*behöver ändra detta*/
+	width:auto;
+}
+
+.navLink{
+	background-color:#f2d29f;
+	position:sticky;
+	top:0;
+	height:120px;
+	z-index:1000;
+}
+
+body {
+	background-color:#f2d29f;
+	text-align:center;
+}
+
+#footer {
+	width:100%;
+}
+
+.bigButton {
+	float: none;
+	display: block;
+	margin: auto;
+	width: 50%;
+}
+
+.store img{
+	width:100%;
+	height: auto;
+}
+
+.store p{
+	display: none;
+	text-shadow:2px;
+}
+
+.store:hover p{
+	display:block;
+}
+
+/*.store:hover a{
+	display:none;
+}*/
+
+/*gör för tillfället inget*/
+.bigButton{
+	text-decoration: none;
+}
+
+.placeholder img{
+	/*background-image: linear-gradient(white, black);*/
+	width: 20%;
+	height: auto;
+}
+
+.games {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-evenly;
+}
+
+.fifth {
+	width: 22%;
+}
+
+.quarter {
+	width: 27%;
+}
+
+h1{
+	margin-top:50px;
+}
+
+.video{
+	position: relative;
+	width: 80%;
+	padding-top: 56.25%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.video iframe{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+	/*.games{
+		flex-direction: column;
+		justify-content: center;
+	}*/
+	
+	.quarter{
+		width:100%;
+	}
+	
+	.fifth{
+		width:50%;
+	}
+	
+	.navLink{
+		height:54px;
+		overflow:visible;
+	}
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+		<link rel="stylesheet" href="../CSS/Style.css">
+		<title>Theo's Steam Engine - Store</title>
+		<link rel="icon" type="image/x-icon" href="../Bilder/Ikon.png">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+	
+	<body>
+		
+		<div class="w3-flex w3-mobile" style="flex-direction: column; justify-content: center; align-items: center;">
+			<div class="w3-bar w3-bottombar w3-border-black navLink" style="position: sticky;top:0;">
+				<div class="w3-dropdown-hover w3-hide-large" style="background-color:#f2d29f; margin-right:90%;">
+					<button class="w3-button w3-hover-black"><i class="material-icons">menu</i></button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a class="w3-bar-item w3-button w3-hover-black" href="../index.html">Store</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Account.html">Account</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Library.html">Library</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="News.html">News</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Help.html">Help</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Buy.html">Buy</a>
+					</div>
+				</div>
+				
+				<div class="w3-hide-small w3-hide-medium">
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="../index.html">Store</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Account.html" id="account">Account</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Library.html">Library</a>
+					</div>
+					<div class="navLink w3-bar-item w3-center">
+						<img src="../Bilder/Ikon2.png">
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="News.html">News</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Help.html">Help</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Buy.html">Buy</a>
+					</div>
+				</div>
+			</div>
+			<div class="w3-center w3-xxlarge"> <!-- content-->
+				<form id="inlog" method="post">
+					<fieldset>
+						<legend>Logga in:</legend>
+						<label for="email">E-post</label><br>
+						<input type="text" id="email" name="email"><br>
+						<label for="password">Lösenord</label><br>
+						<input type="password" id="password" name="password"><br><br>
+						<input type="submit" value="Logga in"> <!--onclick="check()"-->
+					</fieldset>
+				</form>
+				
+			</div>
+			<div class="w3-padding w3-center w3-topbar w3-border-black" id="footer"> <!-- footer-->
+				<p>Theo's Steam Engine<br>
+				Last updated 21-05-2025<br>
+				Contacts: theosteamengine@NotARealCompany.com<br>
+				Adress: Cakestreet 42</p>
+			</div>
+		</div>
+		<script src="../JS/basic.js"></script>
+		<script>
+				function loggaUt(){
+					sessionStorage.setItem("Inloggad", "false");
+					window.location.href = "Hem.html";
+				}
+				
+				if (sessionStorage.getItem("Inloggad") === "true"){
+					document.getElementById("inlog").innerHTML = '<fieldset>'
+						+'<legend>Logga in:</legend>'
+						+'<label for="email">E-post</label><br>'
+						+'<input type="text" id="email" name="email"><br>'
+						+'<label for="password">Lösenord</label><br>'
+						+'<input type="password" id="password" name="password"><br><br>'
+						+'<input type="submit" value="Logga in"> <!--onclick="check()"--><br>'
+						+'<button type="button" onclick="loggaUt()">Logga ut</button>'
+						+'</fieldset>'
+				}
+				
+				let submitForm = document.getElementById("inlog");
+				submitForm.addEventListener("submit", function(event){
+					event.preventDefault();
+					let email = document.getElementById("email").value;
+					let pWord = document.getElementById("password").value;
+					if (sessionStorage.getItem(email) == null){
+						alert("Det finns inget konto med den e-posten.");
+					}
+					else{
+						if (sessionStorage.getItem(email) == pWord){
+							alert("Du är nu inloggad som " + email.slice(0, email.search("@"))); // ta ut allt innan "@"
+							sessionStorage.setItem("Inloggad", "true");
+							sessionStorage.setItem("user", email.slice(0, email.search("@")));
+							window.location.href = "../index.html";
+						}
+						else {
+							alert("Fel lösenord!");
+						}
+					}
+				});
+		</script>
+	</body>
+
+</html>

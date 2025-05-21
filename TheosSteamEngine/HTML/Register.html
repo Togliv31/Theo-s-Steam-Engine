@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+		<link rel="stylesheet" href="../CSS/Style.css">
+		<title>Theo's Steam Engine - Store</title>
+		<link rel="icon" type="image/x-icon" href="../Bilder/Ikon.png">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+	
+	<body>
+		
+		<div class="w3-flex w3-mobile" style="flex-direction: column; justify-content: center; align-items: center;">
+			<div class="w3-bar w3-bottombar w3-border-black navLink" style="position: sticky;top:0;">
+				<div class="w3-dropdown-hover w3-hide-large" style="background-color:#f2d29f; margin-right:90%;">
+					<button class="w3-button w3-hover-black"><i class="material-icons">menu</i></button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a class="w3-bar-item w3-button w3-hover-black" href="../index.html">Store</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Account.html">Account</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Library.html">Library</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="News.html">News</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Help.html">Help</a>
+						<a class="w3-bar-item w3-button w3-hover-black" href="Buy.html">Buy</a>
+					</div>
+				</div>
+				
+				<div class="w3-hide-small w3-hide-medium">
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="../index.html">Store</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Account.html" id="account">Account</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black">
+						<a class="w3-jumbo" href="Library.html">Library</a>
+					</div>
+					<div class="navLink w3-bar-item w3-center">
+						<img src="../Bilder/Ikon2.png">
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="News.html">News</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Help.html">Help</a>
+					</div>
+					<div class="navLink w3-bar-item w3-button w3-hover-black w3-right">
+						<a class="w3-jumbo" href="Buy.html">Buy</a>
+					</div>
+				</div>
+			</div>
+			<div class="w3-center w3-xxlarge"> <!-- content-->
+				<form id="skapa"  method="post">
+					<fieldset>
+						<legend>Create Account:</legend>
+						<!--
+						<label for="fName">Förnamn</label><br>
+						<input type="text" id="fName" name="fName"><br>
+						<label for="lName">Efternamnnamn</label><br>
+						<input type="text" id="lName" name="lName"><br>
+						<label for="uName">Användarnamn</label><br>
+						<input type="text" id="uName" name="uName"><br>
+						-->
+						<label for="email">* Email</label><br>
+						<input type="email" id="email" name="email" required><br>
+						<label for="password">* Password</label><br>
+						<input type="password" id="password" name="password" required><br><br>
+						<label for="confirm">* Confirm Password</label><br>
+						<input type="password" id="confirm" name="confirm" required><br><br>
+						<label for="region">Region</label>
+						<input list="choices" id="region" name="region">
+						<datalist id="choices">
+							<option>EU/Africa</option>
+							<option>America</option>
+							<option>Asia/Australia</option>
+						</datalist><br>
+						<input type="checkbox" id="agree" name="agree" value="agree" required>
+						<label for="agree">* I have read and accepted <a href="ToS.html" target="_blank">the ToS</a></label><br><br>
+						<input type="submit" value="Skapa konto">
+					</fieldset>
+				</form>
+		
+		
+			</div>
+			<div class="w3-padding w3-center w3-topbar w3-border-black" id="footer"> <!-- footer-->
+				<p>Theo's Steam Engine<br>
+				Last updated 21-05-2025<br>
+				Contacts: theosteamengine@NotARealCompany.com<br>
+				Adress: Cakestreet 42</p>
+			</div>
+		</div>
+		<script src="../JS/basic.js"></script>
+		<script>
+		/*function abc(){
+		
+		let ToS = document.getElementById("agree").value;
+			alert(ToS)
+		}*/
+		
+		let submitForm = document.getElementById("skapa");
+		submitForm.addEventListener("submit", function(event){
+			//let ToS = document.getElementById("agree").value;
+			// Man bör kunna skriva "required på alla"
+			event.preventDefault();
+			let email = document.getElementById("email").value;
+			let pWord = document.getElementById("password").value;
+			let confirm = document.getElementById("confirm").value;
+			// om email är null betyder det att den inte redan är registrerad
+			let constraint1 = !(sessionStorage.getItem(email) == null && pWord.length >= 6 && email.search(".") != -1);
+			let constraint2 = confirm == pWord;
+			//let constraint3 = !(ToS == "agree" && email != null && password != null && confirm != null);
+			
+			if (constraint1){
+				alert("Emailen finns redan, saknar punkt, eller så är lösenordet mindre en 6 tecken.");
+			}
+			else {
+				if (constraint2){
+					// sätt in värdena
+					sessionStorage.setItem(email, pWord);
+					alert("Du är nu registrerad som " + email.slice(0, email.search("@")));
+					window.location.href = "LogIn.html";
+				}
+				else{
+					alert("Lösenordet matchar inte");
+				}
+			}
+		});
+
+		</script>
+	</body>
+
+</html>
